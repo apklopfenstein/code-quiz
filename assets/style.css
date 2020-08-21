@@ -1,0 +1,42 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+header {
+    margin: 20px 20px 100px 20px;
+    display: flex;
+}
+
+.timer {
+    margin-left: auto;
+}
+
+#high-score {
+    text-decoration: none;
+    color: mediumorchid;
+}
+
+.start-page {
+    text-align: center;
+}
+
+.start-title {
+    font-size: 3em;
+}
+
+.instructions {
+    font-size: 1.6em;
+    margin-left: 500px;
+    margin-right: 500px;
+    margin-bottom: 40px;
+}
+
+.btn {
+    background-color: indigo;
+    color: white;
+    padding: 0 25px;
+    line-height: 45px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    border: none;
+}
