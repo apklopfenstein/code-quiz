@@ -89,10 +89,14 @@ var answerQuestion = function (isCorrect) {
     // TODO show correct or incorrect after answer
     currentQuestion++;
 
+    if (!isCorrect) {
+        timeRemaining -= 5;
+        timeRemainingEl.textContent = timeRemaining;
+    }
+
     if (currentQuestion < questions.length) {
         showQuestion();
     } else {
-        //TODO show All Done screen
         showGameOver();
     }
 
@@ -102,8 +106,6 @@ var answerQuestion = function (isCorrect) {
         correctOrWrong.textContent = "Correct!";
     } else {
         correctOrWrong.textContent = "Wrong!";
-        timeRemaining -= 5;
-        timeRemainingEl.textContent = timeRemaining;
     }
     gameScreenEl.appendChild(correctOrWrong);
 
