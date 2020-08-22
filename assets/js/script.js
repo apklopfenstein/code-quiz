@@ -95,7 +95,7 @@ var showQuestion = function () {
 
 // concluding if answer is right or wrong
 var answerQuestion = function (isCorrect) {
-    
+
     currentQuestion++;
 
     if (!isCorrect) {
@@ -179,6 +179,8 @@ var saveHighScore = function (event) {
     localStorage.setItem("scores", JSON.stringify(scores));
 
     showHighScore();
+
+    initalsInputEl.value = "";
 };
 
 // print high score to page
