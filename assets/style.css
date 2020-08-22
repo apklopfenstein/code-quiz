@@ -119,6 +119,23 @@ input, select, textarea {
     margin-top: 15px;
 }
 
+.high-score-item {
+    list-style: none;
+    font-size: 1.3em;
+    margin-left: 460px;
+    width: 600px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.high-score-item:nth-child(even) {
+    background-color: lightgray;
+}
+
+.high-score-item:nth-child(odd) {
+    background-color: plum;
+}
+
 .btn-submit {
     line-height: 35px;
 }
@@ -127,7 +144,7 @@ input, select, textarea {
     display: none;
 }
 
-#high-score-page form {
+#high-score-page div.buttons {
     margin-left: 500px;
     margin-top: 10px;
 }

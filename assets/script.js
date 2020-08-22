@@ -8,10 +8,14 @@ var goBackBtn = document.getElementById("go-back-btn");
 var highScoreLink = document.getElementById("high-score");
 var timeRemainingEl = document.getElementById("time-remaining");
 var printScore = document.getElementById("print-score");
+var initalsInputEl = document.getElementById("initals");
+var clearBtn = document.getElementById("clear-btn");
+var highScoreList = document.getElementById("high-score-list");
 var currentQuestion;
 var timerInterval;
 var startTime = 75;
 var timeRemaining;
+var scores = JSON.parse(localStorage.getItem("scores")) || [];
 
 var hideStart = function () {
 
@@ -114,7 +118,7 @@ var answerQuestion = function (isCorrect) {
 var showGameOver = function () {
     highScoreLink.style.display = "none";
     allDoneEl.style.display = "block";
-    
+
     clearInterval(timerInterval);
 
     gameScreenEl.innerHTML = "";
@@ -134,6 +138,7 @@ var showHighScore = function () {
     hideStart();
     hideGame();
     hideGameOver();
+    createHighScores();
 };
 
 var hideHighScore = function () {
@@ -142,15 +147,57 @@ var hideHighScore = function () {
 
 var saveHighScore = function (event) {
     event.preventDefault();
-    hideGame();
-    hideGameOver();
+
+    if (!initalsInputEl.value) {
+        alert("Please enter your initals.");
+        return;
+    };
+
+    var initals = initalsInputEl.value;
+    scores.push({
+        initals: initals,
+        score: timeRemaining
+    });
+
+    scores = scores.sort(function (a, b) {
+        if (a.score > b.score) {
+            return -1;
+        } else if (b.score > a.score) {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+
+    localStorage.setItem("scores", JSON.stringify(scores));
+
     showHighScore();
+};
+
+var createHighScores = function () {
+    highScoreList.innerHTML = "";
+
+    for (var i = 0; i < scores.length; i++) {
+        var score = scores[i];
+        var scoreEl = document.createElement("li");
+        scoreEl.className = "high-score-item";
+        scoreEl.textContent = (i + 1) + ". " + score.initals + " - " + score.score;
+
+        highScoreList.appendChild(scoreEl);
+    }
+
 
 };
 
 var goBack = function (event) {
     event.preventDefault();
     showStart();
+};
+
+var clear = function () {
+    scores = [];
+    localStorage.setItem("scores", JSON.stringify(scores));
+    createHighScores();
 };
 
 var startTimer = function () {
@@ -162,7 +209,7 @@ var startTimer = function () {
         if (timeRemaining === 0) {
             showGameOver();
         }
-        
+
     }, 1000);
 };
 
@@ -227,3 +274,5 @@ initalsForm.addEventListener("submit", saveHighScore);
 goBackBtn.addEventListener("click", goBack);
 
 highScoreLink.addEventListener("click", showHighScore);
+
+clearBtn.addEventListener("click", clear);
