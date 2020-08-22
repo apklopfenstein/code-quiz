@@ -6,6 +6,7 @@ var allDoneEl = document.getElementById("all-done");
 var highScorePage = document.getElementById("high-score-page");
 var initalsForm = document.getElementById("initals-form");
 var goBackBtn = document.getElementById("go-back-btn");
+var highScoreLink = document.getElementById("high-score");
 
 var hideStart = function () {
 
@@ -13,7 +14,7 @@ var hideStart = function () {
 };
 
 var showStart = function () {
-
+    highScoreLink.style.display = "block";
     startPageEl.style.display = "block";
     hideGame();
     hideGameOver();
@@ -26,6 +27,7 @@ var hideGame = function () {
 };
 
 var showGame = function () {
+    highScoreLink.style.display = "none";
 
     gameScreenEl.style.display = "block";
 };
@@ -99,6 +101,7 @@ var answerQuestion = function (isCorrect) {
 };
 
 var showGameOver = function () {
+    highScoreLink.style.display = "none";
     allDoneEl.style.display = "block";
 
     gameScreenEl.innerHTML = "";
@@ -110,6 +113,7 @@ var hideGameOver = function () {
 };
 
 var showHighScore = function () {
+    highScoreLink.style.display = "none";
     highScorePage.style.display = "block";
     hideStart();
     hideGame();
@@ -190,3 +194,5 @@ startBtn.addEventListener("click", startQuiz);
 initalsForm.addEventListener("submit", saveHighScore);
 
 goBackBtn.addEventListener("click", goBack);
+
+highScoreLink.addEventListener("click", showHighScore);

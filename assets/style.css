@@ -15,6 +15,7 @@ header {
 #high-score {
     text-decoration: none;
     color: mediumorchid;
+    cursor: pointer;
 }
 
 .start-page {
