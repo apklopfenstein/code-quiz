@@ -128,6 +128,7 @@ input, select, textarea {
     padding: 10px;
 }
 
+/* alternating background color for scores */
 .high-score-item:nth-child(even) {
     background-color: lightgray;
 }

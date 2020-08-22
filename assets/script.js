@@ -17,6 +17,8 @@ var startTime = 75;
 var timeRemaining;
 var scores = JSON.parse(localStorage.getItem("scores")) || [];
 
+// hide and show screens at proper times
+
 var hideStart = function () {
 
     startPageEl.style.display = "none";
@@ -42,6 +44,7 @@ var showGame = function () {
     gameScreenEl.style.display = "block";
 };
 
+// start quiz
 var startQuiz = function () {
 
     hideStart();
@@ -53,6 +56,7 @@ var startQuiz = function () {
     showQuestion();
 };
 
+// question logic
 var showQuestion = function () {
     var question = questions[currentQuestion];
     var questionText = question.questionText;
@@ -89,8 +93,9 @@ var showQuestion = function () {
     gameScreenEl.appendChild(answersEl);
 };
 
+// concluding if answer is right or wrong
 var answerQuestion = function (isCorrect) {
-    // TODO show correct or incorrect after answer
+    
     currentQuestion++;
 
     if (!isCorrect) {
@@ -131,6 +136,7 @@ var hideGameOver = function () {
     allDoneEl.style.display = "none";
 };
 
+// show high score screen
 var showHighScore = function () {
     highScoreLink.style.display = "none";
     highScorePage.style.display = "block";
@@ -145,6 +151,7 @@ var hideHighScore = function () {
     highScorePage.style.display = "none";
 };
 
+// save high scores to localStorage
 var saveHighScore = function (event) {
     event.preventDefault();
 
@@ -174,6 +181,7 @@ var saveHighScore = function (event) {
     showHighScore();
 };
 
+// print high score to page
 var createHighScores = function () {
     highScoreList.innerHTML = "";
 
@@ -189,17 +197,20 @@ var createHighScores = function () {
 
 };
 
+// go back button
 var goBack = function (event) {
     event.preventDefault();
     showStart();
 };
 
+// clear high score button
 var clear = function () {
     scores = [];
     localStorage.setItem("scores", JSON.stringify(scores));
     createHighScores();
 };
 
+// timer logic
 var startTimer = function () {
     timeRemaining = startTime;
     timeRemainingEl.textContent = timeRemaining;
@@ -213,6 +224,7 @@ var startTimer = function () {
     }, 1000);
 };
 
+// quiz question storage
 questions = [{
         questionText: "Commonly used data types DO NOT include:",
         correctAnswerIndex: 2,
