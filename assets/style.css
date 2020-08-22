@@ -39,4 +39,36 @@ header {
     font-size: 1.2em;
     border-radius: 10px;
     border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: mediumorchid;
+}
+
+#game-screen {
+    width: 800px;
+    margin: 0 auto;
+    display: none;
+}
+
+.question {
+    font-size: 3em;
+}
+
+#answers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+
+}
+
+li .btn {
+    width: 200px;
+    text-align: left;
 }
