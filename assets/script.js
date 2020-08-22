@@ -2,6 +2,7 @@ var startBtn = document.getElementById("start-btn");
 var startPageEl = document.getElementById("start-page");
 var gameScreenEl = document.getElementById("game-screen");
 var currentQuestion;
+var allDoneEl = document.getElementById("all-done");
 
 var hideStart = function () {
 
@@ -92,10 +93,14 @@ var answerQuestion = function (isCorrect) {
 };
 
 var showGameOver = function () {
-    // TODO generarte game over screen DOM
+    allDoneEl.style.display = "block";
 
     gameScreenEl.innerHTML = "";
-    // TODO append game over DOM to gameScreenEl
+    
+};
+
+var hideGameOver = function () {
+    allDoneEl.style.display = "none";
 };
 
 questions = [{
