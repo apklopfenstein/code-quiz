@@ -1,12 +1,17 @@
 var startBtn = document.getElementById("start-btn");
 var startPageEl = document.getElementById("start-page");
 var gameScreenEl = document.getElementById("game-screen");
-var currentQuestion;
 var allDoneEl = document.getElementById("all-done");
 var highScorePage = document.getElementById("high-score-page");
 var initalsForm = document.getElementById("initals-form");
 var goBackBtn = document.getElementById("go-back-btn");
 var highScoreLink = document.getElementById("high-score");
+var timeRemainingEl = document.getElementById("time-remaining");
+var printScore = document.getElementById("print-score");
+var currentQuestion;
+var timerInterval;
+var startTime = 75;
+var timeRemaining;
 
 var hideStart = function () {
 
@@ -14,6 +19,7 @@ var hideStart = function () {
 };
 
 var showStart = function () {
+    timeRemainingEl.textContent = startTime;
     highScoreLink.style.display = "block";
     startPageEl.style.display = "block";
     hideGame();
@@ -36,6 +42,7 @@ var startQuiz = function () {
 
     hideStart();
     showGame();
+    startTimer();
 
     currentQuestion = 0;
 
@@ -61,8 +68,8 @@ var showQuestion = function () {
         buttonEl.className = "btn";
         buttonEl.setAttribute("data-answer-index", i);
         buttonEl.textContent = answers[i];
-        
-        buttonEl.addEventListener("click", function(event) {
+
+        buttonEl.addEventListener("click", function (event) {
             var answerIndex = event.target.getAttribute("data-answer-index");
             answerIndex = parseInt(answerIndex);
             var answerIsCorrect = correctAnswer === answerIndex;
@@ -79,7 +86,7 @@ var showQuestion = function () {
 };
 
 var answerQuestion = function (isCorrect) {
-// TODO show correct or incorrect after answer
+    // TODO show correct or incorrect after answer
     currentQuestion++;
 
     if (currentQuestion < questions.length) {
@@ -95,17 +102,23 @@ var answerQuestion = function (isCorrect) {
         correctOrWrong.textContent = "Correct!";
     } else {
         correctOrWrong.textContent = "Wrong!";
+        timeRemaining -= 5;
+        timeRemainingEl.textContent = timeRemaining;
     }
     gameScreenEl.appendChild(correctOrWrong);
-    
+
 };
 
 var showGameOver = function () {
     highScoreLink.style.display = "none";
     allDoneEl.style.display = "block";
+    
+    clearInterval(timerInterval);
 
     gameScreenEl.innerHTML = "";
-    
+
+    printScore.textContent = timeRemaining;
+
 };
 
 var hideGameOver = function () {
@@ -115,6 +128,7 @@ var hideGameOver = function () {
 var showHighScore = function () {
     highScoreLink.style.display = "none";
     highScorePage.style.display = "block";
+
     hideStart();
     hideGame();
     hideGameOver();
@@ -135,6 +149,19 @@ var saveHighScore = function (event) {
 var goBack = function (event) {
     event.preventDefault();
     showStart();
+};
+
+var startTimer = function () {
+    timeRemaining = startTime;
+    timeRemainingEl.textContent = timeRemaining;
+
+    timerInterval = setInterval(function () {
+        timeRemainingEl.textContent = --timeRemaining;
+        if (timeRemaining === 0) {
+            showGameOver();
+        }
+        
+    }, 1000);
 };
 
 questions = [{
@@ -188,6 +215,8 @@ questions = [{
         ]
     }
 ]
+
+timeRemainingEl.textContent = startTime;
 
 startBtn.addEventListener("click", startQuiz);
 

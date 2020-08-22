@@ -11,7 +11,7 @@
 <body>
     <header>
         <a id="high-score">View High Scores</a>
-        <div class="timer">Time: </div>
+        <div class="timer">Time: <span id="time-remaining"></span></div>
     </header>
     <main>
         <section class="start-page" id="start-page">
@@ -22,7 +22,7 @@
         </section>
         <section id="all-done">
             <h1 class="done-title">All done!</h1>
-            <p class="instructions score">Your final score is <span style="color: red">REPLACE ME!!</span>.</p>
+            <p class="instructions score">Your final score is <span id="print-score"></span>.</p>
             <form id="initals-form">
                 <label for="initals" class="initals">Enter initials:</label>
                 <input id="initals">
