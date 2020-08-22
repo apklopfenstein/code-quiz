@@ -3,6 +3,9 @@ var startPageEl = document.getElementById("start-page");
 var gameScreenEl = document.getElementById("game-screen");
 var currentQuestion;
 var allDoneEl = document.getElementById("all-done");
+var highScorePage = document.getElementById("high-score-page");
+var initalsForm = document.getElementById("initals-form");
+var goBackBtn = document.getElementById("go-back-btn");
 
 var hideStart = function () {
 
@@ -12,6 +15,9 @@ var hideStart = function () {
 var showStart = function () {
 
     startPageEl.style.display = "block";
+    hideGame();
+    hideGameOver();
+    hideHighScore();
 };
 
 var hideGame = function () {
@@ -103,6 +109,30 @@ var hideGameOver = function () {
     allDoneEl.style.display = "none";
 };
 
+var showHighScore = function () {
+    highScorePage.style.display = "block";
+    hideStart();
+    hideGame();
+    hideGameOver();
+};
+
+var hideHighScore = function () {
+    highScorePage.style.display = "none";
+};
+
+var saveHighScore = function (event) {
+    event.preventDefault();
+    hideGame();
+    hideGameOver();
+    showHighScore();
+
+};
+
+var goBack = function (event) {
+    event.preventDefault();
+    showStart();
+};
+
 questions = [{
         questionText: "Commonly used data types DO NOT include:",
         correctAnswerIndex: 2,
@@ -156,3 +186,7 @@ questions = [{
 ]
 
 startBtn.addEventListener("click", startQuiz);
+
+initalsForm.addEventListener("submit", saveHighScore);
+
+goBackBtn.addEventListener("click", goBack);
